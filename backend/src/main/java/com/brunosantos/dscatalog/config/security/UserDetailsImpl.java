@@ -1,6 +1,5 @@
 package com.brunosantos.dscatalog.config.security;
 
-import com.brunosantos.dscatalog.dto.LoginRequest;
 import com.brunosantos.dscatalog.entities.User;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

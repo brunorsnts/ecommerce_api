@@ -1,7 +1,7 @@
 package com.brunosantos.dscatalog.controller.exceptions;
 
+import com.brunosantos.dscatalog.config.security.exceptions.InvalidCredentials;
 import com.brunosantos.dscatalog.services.exceptions.DatabaseException;
-import com.brunosantos.dscatalog.services.exceptions.InvalidLoginException;
 import com.brunosantos.dscatalog.services.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import javax.security.auth.login.LoginException;
 import java.time.Instant;
 
 @ControllerAdvice
@@ -60,6 +59,17 @@ public class GlobalExceptionHandler {
             errorResponse.addError(new Error(f.getField(), f.getDefaultMessage()));
         }
         return ResponseEntity.status(status).body(errorResponse);
+    }
+
+    @ExceptionHandler(InvalidCredentials.class)
+    public ResponseEntity<StandardError> invalidCredential(InvalidCredentials e, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.UNAUTHORIZED;
+        err.setTimestamp(Instant.now());
+        err.setStatus(status.value());
+        err.setError("Invalids Data");
+        err.setMessage(e.getMessage());
+        err.setPath(request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
     }
 
 }
