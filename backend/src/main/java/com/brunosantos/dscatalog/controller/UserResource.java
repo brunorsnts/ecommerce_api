@@ -31,6 +31,7 @@ public class UserResource {
     }
 
     @GetMapping(value = "/{id}")
+    @PreAuthorize("hasAuthority('SCOPE_admin')")
     public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok().body(service.findById(id));
     }
