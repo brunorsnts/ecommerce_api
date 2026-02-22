@@ -2,10 +2,13 @@ package com.brunosantos.dscatalog.controller;
 
 import com.brunosantos.dscatalog.dto.*;
 import com.brunosantos.dscatalog.services.UserService;
+import com.brunosantos.dscatalog.services.exceptions.CreateUserException;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.lang.Long;
 
+@Slf4j
 @RestController
 @RequestMapping("/users")
 public class UserResource {
@@ -38,9 +42,14 @@ public class UserResource {
 
     @PostMapping("/register")
     public ResponseEntity<Void> registerUser(@RequestBody @Valid UserDTO dto) {
-        UserDTO newDto = service.registerUser(dto);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(newDto.getId()).toUri();
+        URI uri = null;
+        try {
+            UserDTO newDto = service.registerUser(dto);
+            uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                    .buildAndExpand(newDto.getId()).toUri();
+        } catch (CreateUserException e) {
+            log.info(e.getMessage());
+        }
         return ResponseEntity.created(uri).build();
     }
 
