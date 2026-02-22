@@ -32,16 +32,14 @@ public class UserDTO {
     @Size(min = 8, max = 20)
     private String password;
 
-    private Set<RoleDTO> roles = new HashSet<>();
+    private Set<Role> roles = new HashSet<>();
 
     public UserDTO(User entity) {
         this.id = entity.getUserId();
         this.email = entity.getEmail();
         this.password = entity.getPassword();
         this.roles = getRoles();
-        for(Role role : entity.getRoles()) {
-            roles.add(new RoleDTO(role));
-        }
+        roles.addAll(entity.getRoles());
     }
 
 }

@@ -1,5 +1,6 @@
 package com.brunosantos.dscatalog.entities;
 
+import com.brunosantos.dscatalog.dto.UserDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -26,11 +27,17 @@ public class User {
     private String email;
     private String password;
 
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JoinTable(
-        name = "tb_users_role",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn (name = "role_id")
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable (
+            name = "tb_users_role",
+            joinColumns = @JoinColumn(name = "user_id")
     )
-    private Set<Role> roles;
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles = new HashSet<>();
+
+    public User(UserDTO dto) {
+        this.email = dto.getEmail();
+        this.password = dto.getPassword();
+    }
 }
