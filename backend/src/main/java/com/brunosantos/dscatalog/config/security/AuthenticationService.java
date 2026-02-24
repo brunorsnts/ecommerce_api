@@ -43,8 +43,8 @@ public class AuthenticationService {
             Instant now = Instant.now();
             Long expiresIn = 3600L;
 
-            String scopes = userDetails.get().getRoles()
-                    .stream().map(Role::getName)
+            String scopes = userDetails.get().getRoles().stream()
+                    .map(role -> role.name().toLowerCase())
                     .collect(Collectors.joining(" "));
 
             JwtClaimsSet claims = JwtClaimsSet.builder()
