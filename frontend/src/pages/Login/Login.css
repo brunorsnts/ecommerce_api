@@ -1,0 +1,117 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.login-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #2A0054, #12002b);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 380px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-icon-container {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #A000A0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid #ffffffaa;
+    margin-bottom: 25px;
+    padding-bottom: 8px;
+}
+
+.input-group svg {
+    color: #ffffffaa;
+    margin-right: 15px;
+    width: 20px;
+}
+
+.input-group input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+    outline: none;
+}
+
+.input-group input::placeholder {
+    color: #ffffffaa;
+}
+
+.options-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 12px;
+    color: #ffffffaa;
+    margin-bottom: 30px;
+}
+
+.options-row label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.forgot-password {
+    text-decoration: none;
+    color: #ffffffaa;
+    font-style: italic;
+    cursor: pointer;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 15px;
+    background-color: #9000A0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    transition: 0.3s;
+}
+
+.btn-login:hover {
+    background-color: #700080;
+}
+
+.btn-register {
+    width: 100%;
+    padding: 15px;
+    background: transparent;
+    color: #ffffffaa;
+    border: none;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
