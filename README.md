@@ -1,16 +1,16 @@
 # 🛒 Ecommerce API (DSCatalog)
 
-Uma aplicação de catálogo de produtos (e-commerce) desenvolvida em **Java com Spring Boot**. Este projeto implementa boas práticas de arquitetura em camadas e disponibiliza uma API REST robusta para a gestão de produtos, categorias e usuários, totalmente protegida com autenticação baseada em tokens.
+Uma aplicação de catálogo de produtos (e-commerce) desenvolvida em **Java com Spring Boot**. Este projeto implementa boas práticas de arquitetura em camadas e disponibiliza uma API REST robusta para a gestão de produtos, categorias e utilizadores, totalmente protegida com autenticação baseada em tokens.
 
 ## ⚙️ Estrutura do Repositório
 
 O projeto está organizado num formato de *monorepo* que inclui:
 - 📁 **`backend/`**: A API REST principal desenvolvida em Java.
-- 📁 **`frontend/`**: Interface de usuário da aplicação.
+- 📁 **`frontend/`**: Interface de utilizador da aplicação.
 
 ## ✨ Funcionalidades Principais
 
-- **CRUD Completo:** Gestão integral de Produtos, Categorias e Usuários.
+- **CRUD Completo:** Gestão integral de Produtos, Categorias e Utilizadores.
 - **Autenticação e Autorização:** Segurança implementada com Spring Security, OAuth2 e JWT (JSON Web Tokens).
 - **Paginação:** Resultados de listagens paginados para otimização de desempenho e consumo de dados.
 - **Arquitetura Limpa:** Estrutura organizada em camadas lógicas (`Controller` → `Service` → `Repository`).
@@ -23,15 +23,17 @@ O projeto está organizado num formato de *monorepo* que inclui:
 | **Framework Backend** | Spring Boot |
 | **Segurança** | Spring Security, OAuth2, JWT |
 | **Persistência de Dados**| JPA / Hibernate |
-| **Banco de Dados** | H2 (em memória) / Preparado para BDs relacionais |
+| **Base de Dados** | MySQL (Executado via Docker Compose) |
 | **Testes** | JUnit, Mockito |
-| **Gerenciador de Dependências**| Maven |
+| **Gestor de Dependências**| Maven |
+| **Infraestrutura** | Docker e Docker Compose |
 
 ## 📋 Pré-requisitos
 
-Antes de executar o projeto localmente, certifique-se de ter instalado na sua máquina:
+Antes de executar o projeto localmente, certifique-se de que tem instalado na sua máquina:
 - **Java 17** (ou versão superior)
 - **Maven**
+- **Docker** e **Docker Compose**
 - Uma IDE da sua preferência (IntelliJ IDEA, VS Code, Eclipse, etc.)
 
 ## 🚀 Como Executar o Projeto (Backend)
@@ -41,34 +43,43 @@ Antes de executar o projeto localmente, certifique-se de ter instalado na sua m�
 git clone [https://github.com/brunorsnts/ecommerce_api.git](https://github.com/brunorsnts/ecommerce_api.git)
 ```
 
-2. Acesse a pasta do backend:
+2. Aceda à pasta do backend:
 ```bash
 cd ecommerce_api/backend
 ```
 
-3. Compile e inicie o servidor:
+3. Inicie o contentor do MySQL utilizando o Docker Compose:
+```bash
+docker-compose up -d
+```
+
+4. Compile e inicie o servidor Spring Boot:
 ```bash
 ./mvnw spring-boot:run
 ```
-*(Em alternativa, você pode importar o projeto na sua IDE e executar a classe principal do Spring Boot).*
+*(Em alternativa, após iniciar a base de dados com o Docker, pode importar o projeto na sua IDE e executar a classe principal do Spring Boot).*
 
-## 🔌 Testando a API
+## 🔐 Credenciais de Acesso (Padrão)
+
+A aplicação já inicia com um utilizador administrador pré-configurado na base de dados para facilitar os testes. Utilize as credenciais abaixo para gerar o seu token de acesso:
+
+- **Utilizador:** `admin`
+- **Password:** `12345678`
+
+## 🔌 Testar a API
 
 Para testar os *endpoints* da aplicação, recomenda-se a utilização de ferramentas como o **Postman** ou o **Insomnia**.
 
 **Exemplos de Endpoints:**
-- `GET /products` → Lista todos os produtos de forma paginada.
-- `POST /categories` → Cria uma nova categoria *(requer credenciais com permissões adequadas)*.
-
-💡 *Dica:* Você pode criar contas com diferentes perfis de acesso ou utilizar o *seed* do banco de dados para testar as diferentes regras de autorização da API.
+- `GET /products` → Lista todos os produtos de forma paginada (rota pública).
+- `POST /categories` → Cria uma nova categoria *(requer o token JWT do utilizador admin)*.
 
 ## 🎯 Ideias para Próximas Melhorias
 
-- [ ] Integração com um banco de dados real (PostgreSQL ou MySQL).
 - [ ] Documentação interativa da API através do Swagger/OpenAPI.
 - [ ] Conclusão e integração total com o frontend (React, Angular ou Vue).
-- [ ] *Deploy* automatizado utilizando Docker e rotinas de CI/CD.
-- [ ] Evoluir e distribuir o sistema em uma arquitetura de microsserviços.
+- [ ] *Deploy* automatizado utilizando rotinas de CI/CD.
+- [ ] Evoluir e distribuir o sistema numa arquitetura de microsserviços.
 
 ## 🤝 Como Contribuir
 
