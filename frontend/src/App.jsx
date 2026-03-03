@@ -1,4 +1,5 @@
-import { Login } from "./login";
+import { Login } from "./pages/Login/Login";
+import './styles/App.css'
 
 function App() {
   return(
