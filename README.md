@@ -1,16 +1,16 @@
 # 🛒 Ecommerce API (DSCatalog)
 
-Uma aplicação de catálogo de produtos (e-commerce) desenvolvida em **Java com Spring Boot**. Este projeto implementa boas práticas de arquitetura em camadas e disponibiliza uma API REST robusta para a gestão de produtos, categorias e utilizadores, totalmente protegida com autenticação baseada em tokens.
+Uma aplicação de catálogo de produtos (e-commerce) desenvolvida em **Java com Spring Boot**. Este projeto implementa boas práticas de arquitetura em camadas e disponibiliza uma API REST robusta para a gestão de produtos, categorias e usuários, protegida com autenticação baseada em tokens.
 
 ## ⚙️ Estrutura do Repositório
 
 O projeto está organizado num formato de *monorepo* que inclui:
-- 📁 **`backend/`**: A API REST principal desenvolvida em Java.
-- 📁 **`frontend/`**: Interface de utilizador da aplicação.
+- 📁 **`backend/`**: A API REST principal desenvolvida em Java, com CRUD completo já implementado.
+- 📁 **`frontend/`**: Interface de usuário da aplicação (atualmente conta apenas com a **tela de login**).
 
-## ✨ Funcionalidades Principais
+## ✨ Funcionalidades Principais (Backend)
 
-- **CRUD Completo:** Gestão integral de Produtos, Categorias e Utilizadores.
+- **CRUD Completo:** Gestão integral de Produtos, Categorias e Usuários via API.
 - **Autenticação e Autorização:** Segurança implementada com Spring Security, OAuth2 e JWT (JSON Web Tokens).
 - **Paginação:** Resultados de listagens paginados para otimização de desempenho e consumo de dados.
 - **Arquitetura Limpa:** Estrutura organizada em camadas lógicas (`Controller` → `Service` → `Repository`).
@@ -19,19 +19,20 @@ O projeto está organizado num formato de *monorepo* que inclui:
 
 | Categoria | Tecnologia |
 | :--- | :--- |
-| **Linguagem** | Java 17+ |
+| **Linguagem** | Java 17+ e JavaScript/TypeScript |
 | **Framework Backend** | Spring Boot |
 | **Segurança** | Spring Security, OAuth2, JWT |
 | **Persistência de Dados**| JPA / Hibernate |
-| **Base de Dados** | MySQL (Executado via Docker Compose) |
+| **Banco de Dados** | MySQL (Executado via Docker Compose) |
 | **Testes** | JUnit, Mockito |
-| **Gestor de Dependências**| Maven |
+| **Gerenciador de Dependências**| Maven (Backend) e NPM/Yarn (Frontend) |
 | **Infraestrutura** | Docker e Docker Compose |
 
 ## 📋 Pré-requisitos
 
-Antes de executar o projeto localmente, certifique-se de que tem instalado na sua máquina:
+Antes de executar o projeto localmente, certifique-se de ter instalado na sua máquina:
 - **Java 17** (ou versão superior)
+- **Node.js** e **npm** (para rodar o frontend)
 - **Maven**
 - **Docker** e **Docker Compose**
 - Uma IDE da sua preferência (IntelliJ IDEA, VS Code, Eclipse, etc.)
@@ -43,12 +44,12 @@ Antes de executar o projeto localmente, certifique-se de que tem instalado na su
 git clone [https://github.com/brunorsnts/ecommerce_api.git](https://github.com/brunorsnts/ecommerce_api.git)
 ```
 
-2. Aceda à pasta do backend:
+2. Acesse a pasta do backend:
 ```bash
 cd ecommerce_api/backend
 ```
 
-3. Inicie o contentor do MySQL utilizando o Docker Compose:
+3. Suba o container do MySQL utilizando o Docker Compose:
 ```bash
 docker-compose up -d
 ```
@@ -57,29 +58,47 @@ docker-compose up -d
 ```bash
 ./mvnw spring-boot:run
 ```
-*(Em alternativa, após iniciar a base de dados com o Docker, pode importar o projeto na sua IDE e executar a classe principal do Spring Boot).*
+*(Em alternativa, após subir o banco de dados com o Docker, você pode importar o projeto na sua IDE e executar a classe principal do Spring Boot).*
+
+## 🖥️ Como Executar o Projeto (Frontend)
+
+1. Abra um novo terminal e acesse a pasta do frontend:
+```bash
+cd ecommerce_api/frontend
+```
+
+2. Instale as dependências do projeto:
+```bash
+npm install
+```
+
+3. Inicie o servidor de desenvolvimento:
+```bash
+npm run dev
+```
+*(O frontend com a tela de login estará disponível no seu navegador, geralmente no endereço fornecido no terminal, como `http://localhost:3000` ou `http://localhost:5173`).*
 
 ## 🔐 Credenciais de Acesso (Padrão)
 
-A aplicação já inicia com um utilizador administrador pré-configurado na base de dados para facilitar os testes. Utilize as credenciais abaixo para gerar o seu token de acesso:
+A aplicação já sobe com um usuário administrador pré-configurado no banco de dados para facilitar os testes (tanto via API quanto na tela de login do front). Utilize as credenciais abaixo:
 
-- **Utilizador:** `admin`
-- **Password:** `12345678`
+- **Usuário (E-mail):** `admin`
+- **Senha:** `12345678`
 
-## 🔌 Testar a API
+## 🔌 Testando a API
 
-Para testar os *endpoints* da aplicação, recomenda-se a utilização de ferramentas como o **Postman** ou o **Insomnia**.
+Para testar os demais *endpoints* da aplicação que ainda não possuem tela, recomenda-se a utilização de ferramentas como o **Postman** ou o **Insomnia**.
 
 **Exemplos de Endpoints:**
 - `GET /products` → Lista todos os produtos de forma paginada (rota pública).
-- `POST /categories` → Cria uma nova categoria *(requer o token JWT do utilizador admin)*.
+- `POST /categories` → Cria uma nova categoria *(requer o token JWT do usuário admin)*.
 
 ## 🎯 Ideias para Próximas Melhorias
 
+- [ ] Desenvolver as demais telas do frontend (produtos, categorias, carrinho, etc.).
 - [ ] Documentação interativa da API através do Swagger/OpenAPI.
-- [ ] Conclusão e integração total com o frontend (React, Angular ou Vue).
 - [ ] *Deploy* automatizado utilizando rotinas de CI/CD.
-- [ ] Evoluir e distribuir o sistema numa arquitetura de microsserviços.
+- [ ] Evoluir e distribuir o sistema em uma arquitetura de microsserviços.
 
 ## 🤝 Como Contribuir
 
